@@ -3,12 +3,16 @@ import mysql.connector
 
 class ItemModel:
     def __init__(self):
+       
         self.config = {
-            'host': os.getenv('DB_HOST', os.getenv('DB_HOST')),
-            'user': os.getenv('DB_USER', os.getenv('DB_USER')),
-            'password': os.getenv('DB_PASS', os.getenv('DB_PASS')),
-            'database': os.getenv('DB_NAME', os.getenv('DB_NAME'))
+            'host': os.environ.get('DB_HOST'),
+            'user': os.environ.get('DB_USER'),
+            'password': os.environ.get('DB_PASSWORD'),
+            'database': os.environ.get('DB_NAME')
         }
+        
+        if not all(self.config.values()):
+            raise ValueError("Missing required environment variables: DB_HOST, DB_USER, DB_PASSWORD, DB_NAME")
 
     def get_all_items(self):
         try:
@@ -20,5 +24,5 @@ class ItemModel:
             conn.close()
             return items
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Database error: {e}")
             return []
