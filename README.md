@@ -434,4 +434,5 @@ vboxuser@Linuxoid:~/satodim/workspace/workspace/projects/lab_docker_homework$ su
  ✔ Network lab_docker_homework_default Removed                              0.vvvv
 ```
 ### Результат работы программы
-[Скриншот базы данных  в браузере](/home/vboxuser/Pictures/Screenshots/Screenshot from 2026-06-01 08-30-30.png)
+<img width="409" height="142" alt="image" src="https://github.com/user-attachments/assets/88af38d6-fe35-47e0-83ae-77009955f606" />
+
