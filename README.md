@@ -268,10 +268,10 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - DB_HOST=db
-      - DB_USER=satodim
-      - DB_PASS=mypass
-      - DB_NAME=mydatabase
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     depends_on:
       db:
         condition: service_healthy
@@ -280,17 +280,17 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: satodim
-      MYSQL_PASSWORD: mypass
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-usatodim", "-pmypass"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${DB_USER}", "-p${DB_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -433,3 +433,5 @@ vboxuser@Linuxoid:~/satodim/workspace/workspace/projects/lab_docker_homework$ su
  ✔ Container lab_docker_homework-db-1  Removed                              1.6s
  ✔ Network lab_docker_homework_default Removed                              0.vvvv
 ```
+### Результат работы программы
+[Скриншот базы данных  в браузере](/home/vboxuser/Pictures/Screenshots/Screenshot from 2026-06-01 08-30-30.png)
